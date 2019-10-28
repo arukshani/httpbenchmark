@@ -1,3 +1,0 @@
-2019-10-28 11:27:28,087 INFO  [main] perf.EchoHttpServer (EchoHttpServer.java:103) - Echo HTTP/1.1 Server. Port: 8688, Boss Threads: 8, Worker Threads: 16, SSL Enabled: false, Sleep Time: 0ms
-2019-10-28 11:27:28,090 INFO  [main] perf.EchoHttpServer (EchoHttpServer.java:107) - Max Heap Size: 3495MB
-2019-10-28 11:27:28,102 INFO  [main] perf.EchoHttpServer (EchoHttpServer.java:110) - Netty Version: 4.1.43.Final

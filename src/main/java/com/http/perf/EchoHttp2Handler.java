@@ -163,4 +163,3 @@ public class EchoHttp2Handler extends Http2ConnectionHandler implements Http2Fra
                                Http2Flags flags, ByteBuf payload) {
     }
 }
-
