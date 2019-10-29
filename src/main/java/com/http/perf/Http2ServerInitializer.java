@@ -109,4 +109,3 @@ public class Http2ServerInitializer extends ChannelInitializer<SocketChannel> {
         }
     }
 }
-
