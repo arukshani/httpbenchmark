@@ -16,7 +16,7 @@ This is a simple echo service written using netty. Receiving payload will be ech
  
 Request Path >> https://localhost:8688/service/EchoService  
 
-TPS for HTTP/1.1 vs HTTP/2 (100 users/50 bytes payload)  - JMeter4  
+TPS for HTTP/1.1 vs HTTP/2 (100 users/50 bytes payload) - JMeter4 - 5 minutes
 
 HTTP/1.1 = 18633  
 HTTP/2.0 = 15968  
