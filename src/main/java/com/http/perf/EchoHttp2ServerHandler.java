@@ -31,11 +31,6 @@ public class EchoHttp2ServerHandler extends ChannelDuplexHandler {
         }
     }
 
-//    @Override
-//    public void channelReadComplete(ChannelHandlerContext ctx) {
-//        ctx.flush();
-//    }
-
     private static void onDataRead(ChannelHandlerContext ctx, Http2DataFrame data) {
         Http2FrameStream stream = data.stream();
         ctx.write(new DefaultHttp2DataFrame(data.content(), data.isEndStream()).stream(stream));

@@ -3,16 +3,12 @@ package com.http.perf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
-import io.netty.handler.codec.http2.DefaultHttp2Connection;
-import io.netty.handler.codec.http2.HttpToHttp2ConnectionHandlerBuilder;
-import io.netty.handler.codec.http2.InboundHttp2ToHttpAdapter;
-import io.netty.handler.codec.http2.InboundHttp2ToHttpAdapterBuilder;
 import io.netty.handler.ssl.ApplicationProtocolNames;
 import io.netty.handler.ssl.ApplicationProtocolNegotiationHandler;
 
 /**
- * Negotiates with the client if HTTP2 or HTTP is going to be used. Once decided, the
- * pipeline is setup with the correct handlers for the selected protocol.
+ * Negotiates with the client if HTTP2 or HTTP is going to be used. Once decided, the pipeline is setup with the correct
+ * handlers for the selected protocol.
  */
 public class Http2OrHttpHandler extends ApplicationProtocolNegotiationHandler {
 
@@ -29,21 +25,7 @@ public class Http2OrHttpHandler extends ApplicationProtocolNegotiationHandler {
     @Override
     protected void configurePipeline(ChannelHandlerContext ctx, String protocol) {
         if (ApplicationProtocolNames.HTTP_2.equals(protocol)) {
-
-            if (h2AggregateContent) {
-                DefaultHttp2Connection connection = new DefaultHttp2Connection(true);
-                InboundHttp2ToHttpAdapter listener = new InboundHttp2ToHttpAdapterBuilder(connection)
-                        .propagateSettings(true)
-                        .validateHttpHeaders(false)
-                        .maxContentLength(MAX_CONTENT_LENGTH).build();
-                ctx.pipeline().addLast(new HttpToHttp2ConnectionHandlerBuilder()
-                                               .frameListener(listener)
-                                               .connection(connection).build());
-                ctx.pipeline().addLast(new EchoHttpServerHandler(sleepTime, true));
-            } else {
-//                ctx.pipeline().addLast(Http2FrameCodecBuilder.forServer().build(), new EchoHttp2ServerHandler());
-                ctx.pipeline().addLast(new EchoHttp2HandlerBuilder().build());
-            }
+            ctx.pipeline().addLast(new EchoHttp2HandlerBuilder().build());
             return;
         } else if (ApplicationProtocolNames.HTTP_1_1.equals(protocol)) {
             ctx.pipeline().addLast(new HttpServerCodec(),
@@ -55,4 +37,3 @@ public class Http2OrHttpHandler extends ApplicationProtocolNegotiationHandler {
         throw new IllegalStateException("Unknown protocol: " + protocol);
     }
 }
-
