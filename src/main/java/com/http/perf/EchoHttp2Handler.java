@@ -15,7 +15,7 @@ import io.netty.handler.codec.http2.Http2Settings;
 import static io.netty.handler.codec.http.HttpResponseStatus.OK;
 
 /**
- * ff
+ * Echo back the HTTP/2 content.
  */
 public class EchoHttp2Handler extends Http2ConnectionHandler implements Http2FrameListener {
 
@@ -33,9 +33,6 @@ public class EchoHttp2Handler extends Http2ConnectionHandler implements Http2Fra
         ctx.close();
     }
 
-    /**
-     * Sends a "Hello World" DATA frame to the client.
-     */
     private void sendResponse(ChannelHandlerContext ctx, int streamId, ByteBuf payload) {
         encoder().writeData(ctx, streamId, payload, 0, true, ctx.newPromise());
     }
