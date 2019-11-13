@@ -29,3 +29,8 @@ HTTP/2.0 = 15968
 
 
 
+java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:StartFlightRecording=duration=60s,filename=H1.jfr -jar ./target/http-benchmark-1.0-SNAPSHOT.jar --ssl --key-store-file ./target/ballerinaKeystore.p12 --key-store-password ballerina
+
+
+
+
